@@ -8,15 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class SkillServiceService {
 
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient: HttpClient) {
 
   }
-  
-  saveCandidate(candidate: Skill): Observable<any>{
-    return this.httpClient.post<any>(`http://localhost:8080/hrplatform/skill`,Skill);
+
+  saveSkill(candidate: Skill): Observable<any> {
+    return this.httpClient.post<any>(`http://localhost:8080/hrplatform/skill`, Skill);
   }
 
-  getSkillById(id:number){
+  getSkillById(id: number) {
     return this.httpClient.get<Skill>(`http://localhost:8080/hrplatform/skill/${id}`);
   }
+
+  getAll(): Observable<Skill[]> {
+    return this.httpClient.get<Skill[]>(`http://localhost:8080/hrplatform/skill`);
+  }
+
+  editSkill(id: number, skill: Skill): Observable<any> {
+    return this.httpClient.put<any>(`http://localhost:8080/hrplatform/skill/${skill.id}`, skill);
+  }
+
+  deleteSkill(skill: Skill) {
+    return this.httpClient.delete<String>(`http://localhost:8080/hrplatform/skill/${skill.id}`, { responseType: 'text' as 'json' });
+  }
+
 }

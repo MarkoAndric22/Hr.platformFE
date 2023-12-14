@@ -8,6 +8,7 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { CandidatesListComponent } from './candidates-list/candidates-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

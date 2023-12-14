@@ -9,31 +9,57 @@ import { Observable } from 'rxjs';
 })
 export class CandidateServiceService {
 
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient: HttpClient) {
 
   }
-  
-  deleteCandidate(candidate: Candidate){
-    return this.httpClient.delete<String>(`http://localhost:8080/hrplatform/candidate/${candidate.id}`, {responseType: 'text' as 'json'});
+
+  deleteCandidate(candidate: Candidate) {
+    return this.httpClient.delete<String>(`http://localhost:8080/hrplatform/candidate/${candidate.id}`, { responseType: 'text' as 'json' });
   }
 
-  saveCandidate(candidate: Candidate): Observable<any>{
-    return this.httpClient.post<any>(`http://localhost:8080/hrplatform/candidate`,candidate);
+  editCandidate(id: number, candidate: Candidate): Observable<any> {
+    return this.httpClient.put<any>(`http://localhost:8080/hrplatform/candidate/${candidate.id}`, candidate);
   }
 
-  getCandidateByName(name:string){
+  saveCandidate(candidate: Candidate): Observable<any> {
+    return this.httpClient.post<any>(`http://localhost:8080/hrplatform/candidate`, candidate);
+  }
+
+  addSkillToCandidate(candidateId: number, skillId: number): Observable<any> {
+    const params = {
+      candidate_id: candidateId.toString(),
+      skill_id: skillId.toString()
+    };
+
+    return this.httpClient.post<any>('http://localhost:8080/hrplatform/ADDskill', null, { params });
+  }
+
+  removeSkillFromCandidate(candidateId: number, skillId: number): Observable<any> {
+    const params = {
+      id_candidate: candidateId.toString(),
+      id_skill: skillId.toString()
+    };
+
+    return this.httpClient.delete<any>('http://localhost:8080/hrplatform/REMOVEskill', { params });
+  }
+
+  getCandidateByName(name: string) {
     return this.httpClient.get<Candidate>(`http://localhost:8080/hrplatform/candidate/${name}`);
   }
 
-  getCandidateBySkill(name:string){
+  getCandidateBySkill(name: string) {
     return this.httpClient.get<Candidate>(`http://localhost:8080/hrplatform/candidate/${Skill.name}`);
   }
 
-  getCandidateById(id:number){
+  getCandidateById(id: number) {
     return this.httpClient.get<Candidate>(`http://localhost:8080/hrplatform/candidate/${id}`);
   }
 
-  getAll():Observable<Candidate[]>{
+  getAll(): Observable<Candidate[]> {
     return this.httpClient.get<Candidate[]>(`http://localhost:8080/hrplatform/candidate`);
+  }
+
+  getSkillforCandidate(id: number): Observable<Skill[]> {
+    return this.httpClient.get<Skill[]>(`http://localhost:8080/hrplatform/candidate/getSkillforCandidate/${id}`);
   }
 }

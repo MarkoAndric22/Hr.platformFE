@@ -1,1 +1,46 @@
-<p>skill-list works!</p>
+<div class="container justify-content-center my-2">
+  <div class="row">
+    <div class="my-2">
+      <button class="btn btn-outline-primary" [routerLink]="['/skill']">
+        Add
+      </button>
+    </div>
+    <div class="col-sm-12">
+      <table class="table table-bordered table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let skill of skills">
+            <td>{{ skill.name }}</td>
+            <td>
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic mixed styles example"
+              >
+                <button
+                  type="button"
+                  class="btn btn-danger mx-2"
+                  (click)="onDelete(skill)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-warning mx-2"
+                  [routerLink]="['/skill', skill.id]"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
