@@ -14,11 +14,18 @@ export class CandidatesListComponent implements OnInit {
 
   candidates?: Candidate[];
   skills?: Skill[];
+  searchTerm: string = '';
+  candidatesWithSkills: any;
 
   constructor(private candidateService: CandidateServiceService, private router: Router) {
 
   }
   ngOnInit(): void {
+    this.getAllWithSkills();
+
+  }
+
+  getAllWithSkills() {
     this.candidateService.getAll()
       .subscribe(candidates => {
         const observables = candidates.map(candidate =>
@@ -27,7 +34,9 @@ export class CandidatesListComponent implements OnInit {
 
         forkJoin(observables).subscribe(skillsArray => {
           this.candidates = candidates.map((candidate, index) => {
-            return { ...candidate, skills: skillsArray[index] };
+            this.candidatesWithSkills = { ...candidate, skills: skillsArray[index] }
+            console.log(this.candidatesWithSkills)
+            return this.candidatesWithSkills;
           });
         });
       });
@@ -45,6 +54,20 @@ export class CandidatesListComponent implements OnInit {
           this.getAll();
         });
     }
+  }
+
+  search() {
+    if (this.searchTerm === '') {
+      this.getAllWithSkills();
+    }
+    this.candidateService.getCandidateByName(this.searchTerm)
+      .subscribe((candidates) => {
+        this.candidates = candidates;
+      });
+    this.candidateService.getCandidateBySkill(this.searchTerm)
+      .subscribe((candidates) => {
+        this.candidates = candidates;
+      });
   }
 
 }

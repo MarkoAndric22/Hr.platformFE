@@ -8,7 +8,9 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 import { CandidatesComponent } from './candidates/candidates.component';
 import { CandidatesListComponent } from './candidates-list/candidates-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddSkillComponent } from './addSkills/add-skill/add-skill.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     SkillComponent,
     SkillListComponent,
     CandidatesComponent,
-    CandidatesListComponent
+    CandidatesListComponent,
+    AddSkillComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],

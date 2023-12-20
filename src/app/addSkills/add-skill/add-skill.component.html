@@ -1,0 +1,49 @@
+<div class="alert alert-primary" role="alert">
+  <label for="title" class="form-label">Candidate skills: </label>
+  <ul class="list-group" *ngFor="let skill of candidateSkills">
+    <div class="p-3 mb-2">
+      <li class="list-group-item p-3 mb-2">
+        {{ skill.name
+        }}<button
+          type="button"
+          class="btn-close"
+          (click)="onRemoveSkillToCandidate(skill.id!)"
+          aria-label="Delete"
+        ></button>
+      </li>
+    </div>
+  </ul>
+
+  <form *ngIf="candidateSkillForm" [formGroup]="candidateSkillForm">
+    <div class="mb-3" *ngIf="skills.length > 0">
+      <div class="p-3 mb-2">
+        <label for="title" class="form-label"
+          >Please selcect skill you want add:</label
+        >
+      </div>
+      <select
+        type="text"
+        formControlName="selectedSkills"
+        class="form-select bg-warning"
+        multiple
+      >
+        <option *ngFor="let skill of skills" [ngValue]="skill">
+          {{ skill?.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <button type="button" class="btn btn-primary" (click)="onSave()">
+        <i class="bi bi-save"></i> Save
+      </button>
+      <button
+        class="btn btn-danger"
+        [routerLink]="['../../candidates']"
+        queryParamsHandling="preserve"
+      >
+        <i class="bi bi-x-circle"></i> Cancel
+      </button>
+    </div>
+  </form>
+</div>

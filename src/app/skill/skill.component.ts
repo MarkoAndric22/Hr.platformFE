@@ -54,8 +54,8 @@ export class SkillComponent implements OnInit {
 
       // Ako je jedinstveno lokalno, dodaj u listu
       uniqueNames.push(name);
-
-      return null; console.log("nije uniqe");
+      console.log("nije uniqe");
+      return null;
     };
   }
 

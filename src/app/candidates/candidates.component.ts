@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CandidateServiceService } from '../core/services/candidate.service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { Skill } from '../core/models/skill.model';
 
 @Component({
   selector: 'app-candidates',
@@ -15,6 +16,8 @@ export class CandidatesComponent implements OnInit {
   id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   candidateForm?: FormGroup;
   candidate: Candidate;
+  skill?: Skill;
+  filterCandidate?: Candidate[]
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +30,6 @@ export class CandidatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.candidate)
     this.buildForm(this.candidate);
   }
 
@@ -51,17 +53,17 @@ export class CandidatesComponent implements OnInit {
         [Validators.required, Validators.email],
       ],
     },
-     { validators: [this.digitValidator]});
+      { validators: [this.digitValidator] });
   }
 
   digitValidator = (formGroup: FormGroup) => {
     const contact_number = formGroup.get('contact_number')?.value;
     const regex = /^\d+$/;
-    
-  
-        if (!regex.test(contact_number)) {
-          formGroup.get('contact_number')?.setErrors({ nondigit: true });
-        }
+
+
+    if (!regex.test(contact_number)) {
+      formGroup.get('contact_number')?.setErrors({ nondigit: true });
+    }
 
   };
 
@@ -79,12 +81,13 @@ export class CandidatesComponent implements OnInit {
     candidateData.date_of_birth = this.datePipe.transform(candidateData.date_of_birth, 'yyyy-MM-dd');
     if (this.id) {
       this.candidateService.editCandidate(this.id, candidateData).subscribe(() => {
-         this.route.navigate(['../candidates']);
+        this.route.navigate(['../candidates']);
       });
     } else {
       this.candidateService.saveCandidate(candidateData).subscribe(() => {
-         this.route.navigate(['../candidates']);
+        this.route.navigate(['../candidates']);
       });
     }
   }
+
 }

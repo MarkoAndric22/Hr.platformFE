@@ -6,6 +6,8 @@ import { candidateResolverResolver } from './core/resolvers/candidate.resolver.r
 import { SkillComponent } from './skill/skill.component';
 import { skillResolverResolver } from './core/resolvers/skill.resolver.resolver';
 import { SkillListComponent } from './skill-list/skill-list.component';
+import { AddSkillComponent } from './addSkills/add-skill/add-skill.component';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: 'candidate/:id', component: CandidatesComponent, resolve: { resolver: candidateResolverResolver }, },
@@ -14,6 +16,7 @@ const routes: Routes = [
   { path: 'skill/:id', component: SkillComponent, resolve: { resolver: skillResolverResolver }, },
   { path: 'skill', component: SkillComponent },
   { path: 'skills', component: SkillListComponent },
+  { path: 'addSkill/:id', component: AddSkillComponent, resolve: { resolver: candidateResolverResolver }, },
 
 
 ];

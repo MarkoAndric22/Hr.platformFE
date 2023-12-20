@@ -1,67 +1,97 @@
-
-<form [formGroup]="candidateForm" *ngIf="candidateForm" (ngSubmit)="onSave()">
+<div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
+  <form [formGroup]="candidateForm" *ngIf="candidateForm" (ngSubmit)="onSave()">
     <div class="row justify-content-center">
-  
       <div class="col-md-8 col-lg-6">
-  
-        <div class="from-group">
+        <div class="from-group shadow-none p-3 mb-5 bg-body-tertiary rounded">
           <label for="name">Name</label>
-          <input id="name" class="form-control" placeholder="Name"  type="text" formControlName="name"/>
+          <input
+            id="name"
+            class="form-control"
+            placeholder="Name"
+            type="text"
+            formControlName="name"
+          />
           <div class="alert alert-danger" *ngIf="hasErrors('name')">
-            <span *ngIf="hasErrors('name','required')" >
+            <span *ngIf="hasErrors('name', 'required')">
               <small>Name is required!</small>
             </span>
-            <span *ngIf="hasErrors('name','minlength')" >
+            <span *ngIf="hasErrors('name', 'minlength')">
               <small>Name must to be min 2 length!</small>
             </span>
-          <span *ngIf="hasErrors('name','maxlength')" >
-            <small>Name must to be max 50 length!</small>
-          </span>
+            <span *ngIf="hasErrors('name', 'maxlength')">
+              <small>Name must to be max 50 length!</small>
+            </span>
           </div>
 
           <label for="date_of_birth">date_of_birth</label>
-          <input id="date_of_birth" class="form-control" placeholder="date_of_birth"  type="date" formControlName="date_of_birth"/>
+          <input
+            id="date_of_birth"
+            class="form-control"
+            placeholder="date_of_birth"
+            type="date"
+            formControlName="date_of_birth"
+          />
           <div class="alert alert-danger" *ngIf="hasErrors('date_of_birth')">
-            <span *ngIf="hasErrors('date_of_birth','required')" >
+            <span *ngIf="hasErrors('date_of_birth', 'required')">
               <small>date_of_birth is required!</small>
             </span>
           </div>
 
-         
-            <label for="contact_number">Contact Number</label>
-            <input id="contact_number" class="form-control" placeholder="Contact Number" type="text" formControlName="contact_number"/>
-            <div class="alert alert-danger" *ngIf="hasErrors('contact_number')">
-              <span *ngIf="hasErrors('contact_number','required')" >
-                <small>Contact number is required!</small>
-              </span>
-              <span *ngIf="hasErrors('contact_number','minlength')">
-                <small>Phone number must be min 10 digits long!</small>
-              </span>
-              <span *ngIf="hasErrors('contact_number','nondigit')">
-                <small>Invalid phone number format!</small>
-              </span>
-            </div>
-          
-          
+          <label for="contact_number">Contact Number</label>
+          <input
+            id="contact_number"
+            class="form-control"
+            placeholder="Contact Number"
+            type="text"
+            formControlName="contact_number"
+          />
+          <div class="alert alert-danger" *ngIf="hasErrors('contact_number')">
+            <span *ngIf="hasErrors('contact_number', 'required')">
+              <small>Contact number is required!</small>
+            </span>
+            <span *ngIf="hasErrors('contact_number', 'minlength')">
+              <small>Phone number must be min 10 digits long!</small>
+            </span>
+            <span *ngIf="hasErrors('contact_number', 'nondigit')">
+              <small>Invalid phone number format!</small>
+            </span>
+          </div>
 
           <label for="email">email</label>
-          <input id="email" class="form-control" placeholder="email"  
-          type="email" formControlName="email"/>
+          <input
+            id="email"
+            class="form-control"
+            placeholder="email"
+            type="email"
+            formControlName="email"
+          />
           <div class="alert alert-danger" *ngIf="hasErrors('email')">
-            <span *ngIf="hasErrors('email','required')" >
+            <span *ngIf="hasErrors('email', 'required')">
               <small>email is required!</small>
             </span>
           </div>
         </div>
-  
-        <div class="d-flex justify-content-end mt-2">
-          <button type="button" class="mx-1 btn  btn-outline-primary" (click)="onSave()"><i class="bi bi-save"></i></button>
-          <button *ngIf="!id" class="mx-1 btn  btn-outline-danger" [routerLink]="['../candidates']" queryParamsHandling="preserve" ><i class="bi bi-x-circle"></i> Cancel</button>
-          <button *ngIf="id" class="mx-1 btn  btn-outline-danger" [routerLink]="['../../candidates']" queryParamsHandling="preserve" ><i class="bi bi-x-circle"></i> Cancel</button>
+
+        <div
+          class="d-flex justify-content-end mt-2 shadow-none p-3 mb-5 bg-body-tertiary rounded"
+        >
+          <button
+            type="button"
+            class="mx-1 btn btn-outline-primary"
+            (click)="onSave()"
+          >
+            <i class="bi bi-save"></i>
+          </button>
+          <button
+            *ngIf="!id"
+            class="mx-1 btn btn-outline-danger"
+            [routerLink]="['../candidates']"
+            queryParamsHandling="preserve"
+          >
+            <i class="bi bi-x-circle">Cancel</i>
+          </button>
         </div>
       </div>
-  
-  
-      </div>
-  
+    </div>
   </form>
+</div>

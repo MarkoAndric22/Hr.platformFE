@@ -1,9 +1,19 @@
 <div class="container justify-content-center my-2">
   <div class="row">
     <div class="my-2">
-      <button class="btn btn-outline-primary" [routerLink]="['/skill']">
-        Add
-      </button>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <button
+            class="badge rounded-pill text-bg-primary"
+            [routerLink]="['/skill']"
+          >
+            Add
+          </button>
+          <button class="badge rounded-pill text-bg-primary">
+            <a class="nav-link" href="home">Home </a>
+          </button>
+        </div>
+      </nav>
     </div>
     <div class="col-sm-12">
       <table class="table table-bordered table-responsive">

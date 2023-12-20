@@ -1,58 +1,91 @@
-<div class="container justify-content-center my-2">
-  <div class="row">
-    <div class="my-2">
-      <button class="btn btn-outline-primary" [routerLink]="['/candidate']">
-        Add
-      </button>
-    </div>
-    <div class="col-sm-12">
-      <table class="table table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
-            <th scope="col">Skills</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let candidate of candidates">
-            <td>{{ candidate.name }}</td>
-
-            <td>
-              <div
-                class="btn-group"
-                role="group"
-                aria-label="Basic mixed styles example"
+<div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
+  <div class="container justify-content-center my-2">
+    <div class="row">
+      <div class="my-2">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container">
+            <button
+              class="badge rounded-pill text-bg-primary"
+              [routerLink]="['/candidate']"
+            >
+              Add
+            </button>
+            <button class="badge rounded-pill text-bg-primary">
+              <a class="nav-link" href="home">Home </a>
+            </button>
+            <div class="input-group">
+              <input
+                class="form-control mr-sm-2"
+                [(ngModel)]="searchTerm"
+                type="text"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success"
+                type="button"
+                (click)="search()"
               >
-                <button
-                  type="button"
-                  class="btn btn-danger mx-2"
-                  (click)="onDelete(candidate)"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
+                Search
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="col-sm-12">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Actions</th>
+              <th scope="col">Skills</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let candidate of candidates">
+              <td>{{ candidate.name }}</td>
 
-                <button
-                  type="button"
-                  class="btn btn-warning mx-2"
-                  [routerLink]="['/candidate', candidate.id]"
+              <td>
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic mixed styles example"
                 >
-                  <i class="bi bi-eye"></i>
-                </button>
-              </div>
-            </td>
+                  <button
+                    type="button"
+                    class="btn btn-danger mx-2"
+                    (click)="onDelete(candidate)"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
 
-            <td class="flex flex-wrap">
-              <div *ngFor="let skill of candidate.skills">
-                {{ skill.name }}
-              </div>
-              <!-- <ng-container *ngFor="let skill of skills">
-                <p class="p-1 flex">{{ skill.name }}</p>
-              </ng-container> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                  <button
+                    type="button"
+                    class="btn btn-warning mx-2"
+                    [routerLink]="['/candidate', candidate.id]"
+                  >
+                    <i class="bi bi-eye"></i>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="badge rounded-pill text-bg-success"
+                    [routerLink]="['/addSkill', candidate.id]"
+                  >
+                    <i class="bi bi-plus">Skill</i>
+                  </button>
+                </div>
+              </td>
+
+              <td class="flex flex-wrap">
+                <div *ngFor="let skill of candidate.skills">
+                  {{ skill.name }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
